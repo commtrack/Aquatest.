@@ -1,0 +1,61 @@
+{% extends "hq/base.html" %}
+{% load i18n %}
+{% load dashboard_tags %}
+{% load mainreport_tags %}
+{% load tester_tags %}
+
+{% block title %}{% trans "Testers" %}{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{MEDIA_URL}}/graphing/flot/jquery.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/graphing/flot/jquery.flot.js"></script>
+{% endblock %}
+
+{% block org_content %}
+<h2>Testers Registered on the System</h2>
+        <div class="add_left">
+            <a href="/tester/add" class="add"> Add a new Tester </a>
+        </div>
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">Surname</th>
+                                <th scope="col">Firstname</th>
+				<th scope="col">Username</th>
+                                <th scope="col">PhoneNumber</th>
+                                <th scope="col">Samples Last Month</th>
+                                <th scope="col">Samples all time</th>
+				<th scope="col">Last Seen</th>
+                                <th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>{% if testers %}{% for tester in testers %}
+			<tr>
+
+                                <td>{{ testers.chw_username }}</td>
+				<td>{{ tester.last_name }}</a></td>
+                                <td>{{ testers.first_name }}</a></td>
+				<td>{{ testers.primary_phone }}</td>
+                                <td>{{ testers.firstname }}</td>
+                                <td>{{ testers.firstname }}</td>
+                                <td>{{ testers.firstname }}</td>
+                                <td><a href="/testers/{{ testers.pk }}/edit">Edit</a> | <a href="/testers/{{ testers.pk }}/">Delete</a></td>
+			</tr>{% endfor %}{% else %}
+			<tr class="no-data">
+				<td colspan="3">
+					No testers Yet.
+					<a href="/testers/add" class="add">
+						Add a testers
+					</a>
+				</td>
+			</tr>{% endif %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+					
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+{% get_tester_counts user startdate enddate %}
+{% endblock %}
