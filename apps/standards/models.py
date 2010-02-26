@@ -14,7 +14,7 @@ class Standard(models.Model):
     govering_body = models.CharField(max_length=100)
     date_effective = models.DateField()
     modified = models.DateTimeField()
-    creted = models.DateTimeField()
+    created = models.DateTimeField()
     water_use_type = models.ForeignKey(WaterUseType)
 
     def __unicode__(self):

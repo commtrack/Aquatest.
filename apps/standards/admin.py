@@ -1,13 +1,15 @@
 from standards.models import Standard,WaterUseType
-
-
+from django.contrib import admin
+from hq.models import *
+from resources.models import *
 from django.contrib import admin
 
-#class PollAdmin(admin.ModelAdmin):
-#    fields = ['pub_date', 'question']
 
-#admin.site.register(Poll, PollAdmin)
+class WaterUseTypeAdmin(admin.ModelAdmin):
+    list_display = ('description', 'modified','created')
+admin.site.register(WaterUseType, WaterUseTypeAdmin)
 
-admin.site.register(Standard)
-admin.site.register(WaterUseType)
+class StandardAdmin(admin.ModelAdmin):
+    list_display = ('name','govering_body','date_effective','modified','created','water_use_type')
+admin.site.register(Standard, StandardAdmin)
 
