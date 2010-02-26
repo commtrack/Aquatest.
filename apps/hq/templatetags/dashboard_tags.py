@@ -100,7 +100,7 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
     # user).  It also populates the hash of date-->count mappings per user
     # to be displayed in the next loop.
     
-    
+    ####### user are the java reporter people --> allen
     total_counts_by_date = {"total": 0}
     for user in ordered_users:
         ret += '\n  <th>%s</th>' % (user)
