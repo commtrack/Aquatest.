@@ -4,6 +4,9 @@ from hq.models import *
 from resources.models import *
 from django.contrib import admin
 
+'''
+customize
+'''
 
 class WaterUseTypeAdmin(admin.ModelAdmin):
     list_display = ('description', 'modified','created')
