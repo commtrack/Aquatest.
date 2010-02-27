@@ -5,6 +5,8 @@ from reporters.models import Reporter
 from locations.models import Location
 from resources.models import *
 
+'''
+'''
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'code', 'category','domain')
     list_filter = ['domain', 'category', 'status']

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from samples.models import *
 
+'''
+'''
 class SampleAdmin(admin.ModelAdmin):
     list_display = ('taken_by','sampling_point','notes','date_taken','date_received','created','modified')
 admin.site.register(Sample, SampleAdmin)
