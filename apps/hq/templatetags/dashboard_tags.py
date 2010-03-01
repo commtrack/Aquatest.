@@ -26,13 +26,13 @@ output_format = '%Y-%m-%d %H:%M'
 
 @register.simple_tag
 def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=True):
-    
+
     # todo:  query the global meta tables to get all the users
     # and/or query the ExtUser table to get all the registered users.
     totalspan = enddate-startdate
     report_hash = {}
     extuser = ExtUser.objects.get(id=user.id)
-    
+
     for day in range(0,totalspan.days+1):
         delta = timedelta(days=day)
         target_date = startdate + delta
@@ -41,12 +41,12 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
     # the actual tables for usernames
     defs = FormDefModel.objects.all().filter(domain=extuser.domain)
     ret = ""
-    
+
     username_to_count_hash = { }
     if use_blacklist:
         domain_blacklist = extuser.domain.get_blacklist()
     for fdef in defs:
-        try: 
+        try:
             # don't do anything if we can't find a username column
             username_col = fdef.get_username_column()
             if not username_col:
@@ -64,9 +64,9 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
                     this_user_hash = {"total" : 0 }
                     # this_user_hash = {}
                 else:
-                    this_user_hash = username_to_count_hash[user]   
+                    this_user_hash = username_to_count_hash[user]
                 # we add one to the enddate because the db query is not inclusive.
-                userdailies = helper.get_filtered_date_count(startdate, 
+                userdailies = helper.get_filtered_date_count(startdate,
                                                              enddate + timedelta(days=1),
                                                              filters={username_col: user})
                 for date_count_pair in userdailies:
@@ -83,23 +83,23 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
             # this shouldn't blow up the entire view
             logging.error("problem in dashboard display: %s" % e)
             ret += '<p style="font-weight:bold; color:red;">problem in dashboard display.  Not all data will be visible.  Your error message is: %s</p>' % e
-            
+
     ret += '''<table>\n<thead><tr>
                 <th>Date</th>
                 <th>Grand Total</th>'''
-    
+
     # preprocess all users by removing them if they don't have any data at all
     # for the period
     ordered_users = []
     for user in username_to_count_hash:
         if username_to_count_hash[user]["total"]:
-           ordered_users.append(user)  
+           ordered_users.append(user)
     ordered_users.sort()
-    
+
     # this block generates the table definition, and headers (one for each
     # user).  It also populates the hash of date-->count mappings per user
     # to be displayed in the next loop.
-    
+
     ####### user are the java reporter people --> allen
     total_counts_by_date = {"total": 0}
     for user in ordered_users:
@@ -109,7 +109,7 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
                 continue
             # czue - why is this check here?  I don't actually think
             # its possible that the key is already there, and if it is
-            # it seems like an error.  Leaving for someone else 
+            # it seems like an error.  Leaving for someone else
             if not report_hash[datestr].has_key(user):
                 report_hash[datestr][user]=username_to_count_hash[user][datestr]
             if not datestr in total_counts_by_date:
@@ -122,27 +122,27 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
     if totalspan.days >= 0:
         ret += "\n<tr class=%s>" % _get_class(count)
         count += 1
-        ret += "<td><b>All Dates Shown</b></td>" 
+        ret += "<td><b>All Dates Shown</b></td>"
         ret += "<td><b>%s</b></td>" % (total_counts_by_date["total"])
         for user in ordered_users:
             ret += "<td><b>%s</b></td>" % (username_to_count_hash[user]["total"])
-    
+
     dateranges = range(0,totalspan.days+1)
-    dateranges.reverse() 
+    dateranges.reverse()
     for day in dateranges:
         delta = timedelta(days=day)
         target_date = startdate + delta
         date = target_date.strftime('%m/%d/%Y')
         ret += '\n<tr class="%s">' % _get_class(count)
-        count += 1 
+        count += 1
         ret += "<td>%s</td>" % (date)
         # add total for this date
         if date in total_counts_by_date:
             ret += "<td><b>%s</b></td>" % (total_counts_by_date[date])
         else:
             # we could theoretically append all 0's in one fall swoop here
-            # and move on to the next date.  For now just let it be 
-            # slightly less efficient and address this as a potential 
+            # and move on to the next date.  For now just let it be
+            # slightly less efficient and address this as a potential
             # performance gain
             ret += "<td>0</td>"
         for user in ordered_users:
@@ -153,16 +153,16 @@ def get_dashboard_user_counts(user, startdate=None, enddate=None, use_blacklist=
         ret += "</tr>\n"
     ret += "</table>"
     username_to_count_hash.clear()
-    
+
     append_chart = False
     if append_chart:
         ret += _get_chart_display(extuser.domain, startdate, enddate)
-    
+
     return ret
 
 def _get_chart_display(domain, startdate, enddate):
-    # add the chart.  this might be a bit hacky, but we're going 
-    # to try using render_to_string and inline_rawgraph to return 
+    # add the chart.  this might be a bit hacky, but we're going
+    # to try using render_to_string and inline_rawgraph to return
     # this with the tag
     try:
         chart = RawGraph.objects.get(title="CHW Submissions Over Time")
@@ -176,7 +176,7 @@ def _get_chart_display(domain, startdate, enddate):
     except Exception, e:
         logging.error(e)
         return ""
-    
+
 def _get_class(count):
     if count % 2 == 0:
         return "even"

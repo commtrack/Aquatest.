@@ -2,13 +2,13 @@
  ** Main wrapper/body stylings
  *******************************************/
 
-body {  
+body {
     background-color: #eeeeee;
 }
 
 #inner {
     padding-top: 10px;
-    padding-bottom: 10px;  
+    padding-bottom: 10px;
     /* make it not look ridiculous if there's no content there */
     min-height: 300px;
 }
@@ -17,7 +17,7 @@ body {
     width: 83em;
     margin: 0 auto;
     background: #fff;
-    
+
     /* a little pretty for the 10/dec demo */
     -moz-box-shadow: 4px 4px 8px #aaa;
     box-shadow: 4px 4px 8px #aaa;
@@ -34,13 +34,13 @@ body {
  ** Links
  *******************************************/
 
-a {  
+a {
     text-decoration: none;
 }
 
-/* this is how you make something with a javascript action 
+/* this is how you make something with a javascript action
    look like our links */
-   
+
 .js_link {
 	background:transparent;
 	color: #000099;
@@ -59,9 +59,9 @@ a {
 
 /* give our tables a little border */
 table {
-    border: 1px solid #bbbbbb; 
+    border: 1px solid #bbbbbb;
 }
-	
+
 /* this puts a scrollable area around a big table, gives it some padding
    and a slightly different background color so it stands out a little
 */
@@ -73,11 +73,11 @@ table {
 }
 
 
-/* 
-   Table/column sort stuff.   
+/*
+   Table/column sort stuff.
    The class "sorted" defines the color, the position
    of the image, and the padding for the image.  The
-   class "ascending" or "descending" defines which image 
+   class "ascending" or "descending" defines which image
    is used.
    So the way to get this to show up in html would be
    <th class="sorted descending">
@@ -115,7 +115,7 @@ ul {
     list-style: none;
 }
 
-    
+
 /*******************************************
  ** Forms
  *******************************************/
@@ -128,11 +128,12 @@ ul {
 
 
 #header, #footer {
-    background: #940025;
+    background: #0E6F92;
+    /*background: #940025;*/
     overflow: hidden;
     padding-bottom: 0px;
     position: relative;
-    color:white;    
+    color:white;
 }
 
 #footer {
@@ -156,7 +157,8 @@ ul {
 }
 
 #branding h1 {
-    background: #940025; 
+    background: #0E6F92;
+    /*background: #940025;*/
     padding-left: .5em;
     font-size: 28px;
     margin: 18px 0;
@@ -165,7 +167,7 @@ ul {
 }
 
 #loginblock {
-    border:2px solid lightgray;        
+    border:2px solid lightgray;
     width:400px;
     background-color:#f8f8f8;
     margin-left:auto;
@@ -186,7 +188,7 @@ ul {
     padding: 1.2em 10px;
     font-size: 11px;
     text-align: right;
-    color: white;    
+    color: white;
 }
 
 
@@ -203,26 +205,26 @@ ul {
         padding: 0;
         margin: 0;
     }
-    
+
     /* global tabs sit on the right,
      * page-specific tabs sit on the
      * left, to draw more attention */
     #tabs      { left: 0; }
     #page-tabs { right: 0;  }
-    
+
         #tabs li,
         #page-tabs li {
             display: block;
             float: left;
             line-height: 28px;
         }
-        
+
         /* 5px spacing between each tab, to match
          * the top gap, since we're using pixel-
          * positioned backgrounds */
         #tabs li      { }
         #page-tabs li { }
-    
+
             #tabs li a,
             #page-tabs li a {
                 color: #fff;
@@ -230,31 +232,33 @@ ul {
                 padding: 0 1em;
                 border-right: 1px solid #ffffff;
             }
-            
+
             #tabs li.active a,
             #page-tabs li.active a,
             #tabs li.active a:hover,
             #page-tabs li.active a:hover {
-                
+
                 /* border the same color as the
                  * strip in the header-bg.png */
-                background: #c70025;
+                /*background: #c70025;*/
+                background: #4AC1DB;
                 border-bottom: 0;
-            
+
                 /* nudge the active tab
                  * north by one pixel */
                 margin-top: -1px;
-            
+
                 /* don't underline links, even when hovering,
                  * so we don't highlight the fact that this
                  * is a link (it's already active)  */
                 text-decoration: none;
             }
-        
+
             /* brighten up inactive tabs when hovering */
             #tabs li a:hover,
             #page-tabs li a:hover {
-                background: #c70025;
+                background: #4AC1DB;
+                /*background: #c70025;*/
             }
 
 
@@ -262,7 +266,7 @@ ul {
  ** Custom Properties
  *******************************************/
 
-/* We're using notice for links/buttons. Blueprint makes them yellow, but we prefer a 
+/* We're using notice for links/buttons. Blueprint makes them yellow, but we prefer a
    more tasteful grey/blue */
 
 .notice {background:#DDEDEE;color:#374445;border-color:#A4B9B9;}
@@ -271,7 +275,7 @@ ul {
 /* these do some generic stylings of "good" and "bad" things happening */
 
 /* commented out for now, blueprint does a decent job with these
- 
+
 .success {
     font-weight: bold;
     color: green;
@@ -291,7 +295,7 @@ ul {
 
 div.daterange_tabs {
     text-align: center;
-    height: 25px;       
+    height: 25px;
 }
 
 div.daterange_tabs ul {
@@ -299,22 +303,22 @@ div.daterange_tabs ul {
     margin-right: 30px;
     padding: 0;
     list-style: none;
-    line-height: normal;    
-    width:auto;  
+    line-height: normal;
+    width:auto;
 }
 
 div.daterange_tabs  li {
     float: left;
     border:2px solid gray;
-    margin-left: 4px;   
+    margin-left: 4px;
     margin-right: 4px;
 }
 
 div.daterange_tabs  a {
     float:left;
     width:8em;
-    text-decoration:none;   
-    padding:0.2em 0.6em;      
+    text-decoration:none;
+    padding:0.2em 0.6em;
 }
 
 
@@ -330,12 +334,12 @@ div.daterange_tabs  a {
     margin-top: 10px;
     padding: 0px;
     padding-bottom: 7px;
-    border-bottom-width: 1px; 
+    border-bottom-width: 1px;
     border-bottom-color: #DADFF9;
     border-bottom-style: solid;
 }
 
-#subheading li 
+#subheading li
 {
     display: inline;
     margin: 0px;
@@ -346,7 +350,7 @@ div.daterange_tabs  a {
     background-color: #DADFF9;
     margin-left: 0px;
     margin-right: 0px;
-    border-right-width: 1px; 
+    border-right-width: 1px;
     border-right-color: #555555;
     border-right-style: solid;
     padding-left: 10px;
